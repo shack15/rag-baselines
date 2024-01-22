@@ -5,7 +5,7 @@ def basic_query(query: str = "This is an example query a user would ask of your 
     The most basic way to use RAG to answer questions. Simply pulls the data from the database and loads it into context of an LLM.
     """
     embedded_query = embed(query)
-    context = retrieve(embedded_query)
+    context = retrieve(embedded_query)['text']
     system_prompt = """
                     You are a retrieval system designed to help users learn about <YOUR TOPIC>. You will receive a question on <YOUR TOPIC>, as well as relevant context for it, and you will answer the question. The following is a set of context and the question:
 
@@ -21,5 +21,6 @@ def basic_query(query: str = "This is an example query a user would ask of your 
 
                     #RESPONSE:
                     """
-    system_prompt.replace("{context}", context).replace("{question}", query)
+    
+    system_prompt = system_prompt.replace("{context}", context).replace("{question}", query)
     return generate(system_prompt)
