@@ -29,9 +29,14 @@ def retrieve(vector: np.array, metadata: bool = False) -> dict[str, Union[list[s
     Returns dict in form {"text": <LIST OF TEXTS>, "metadata": <LIST OF METADATA>}. 
     """
 
-    # example implementation
+    ##### EXAMPLE IMPLEMENTATION #####
+    relevant_texts = collection.query(query_embedding = vector)
+    text = relevant_texts['documents'][0]
+    metadata = relevant_texts['metadata'][0]
+    return {"text": text, "metadata": metadata}
+    ##################################
 
-    return {"text": [""], "metadata": [{}]}
+    # return {"text": [""], "metadata": [{}]}
 
 def insert(vector: np.array, metadata: dict = {}) -> str:
     """
@@ -44,7 +49,18 @@ def generate(query: str) -> str:
     """
     Simulates generating an LLM output given a query. Returns the string result of the LLM call.
     """
-    return "As a large language model..."
+
+    ##### EXAMPLE IMPLEMENTATION #####
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": query}
+        ]
+        )
+    ##################################
+    
+    # return "As a large language model..."
 
 def embed(text: str) -> np.array:
     """
@@ -52,7 +68,7 @@ def embed(text: str) -> np.array:
     """
     ##### EXAMPLE IMPLEMENTATION #####
     embedding = gen.embed([text])
-    return embedding
+    return embedding[0]
     ##################################
 
     # return np.array([0])
