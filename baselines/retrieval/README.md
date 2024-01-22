@@ -1,5 +1,5 @@
 # Retrieval Baselines
-Set of base implementations of different retrieval methods.
+Set of base implementations of different retrieval methods. All of these assume we have data in a vector database loaded up already.
 
 # Best Practices
 * An LLM is able to understand and process *markdown*, *html*, or *xml* the best as a query due to its structure with minimal tagging

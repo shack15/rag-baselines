@@ -1,3 +1,7 @@
+import os
+import sys
+module_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
+sys.path.append(module_dir)
 from utils import retrieve, generate, embed
 
 def basic_query(query: str = "This is an example query a user would ask of your data.") -> str:
@@ -6,6 +10,7 @@ def basic_query(query: str = "This is an example query a user would ask of your 
     """
     embedded_query = embed(query)
     context = retrieve(embedded_query)['text']
+
     system_prompt = """
                     You are a retrieval system designed to help users learn about <YOUR TOPIC>. You will receive a question on <YOUR TOPIC>, as well as relevant context for it, and you will answer the question. The following is a set of context and the question:
 
@@ -22,5 +27,9 @@ def basic_query(query: str = "This is an example query a user would ask of your 
                     #RESPONSE:
                     """
     
-    system_prompt = system_prompt.replace("{context}", context).replace("{question}", query)
+    system_prompt = system_prompt.replace("{context}", str(context)).replace("{question}", query)
     return generate(system_prompt)
+
+
+if __name__ == "__main__":
+    print(basic_query())

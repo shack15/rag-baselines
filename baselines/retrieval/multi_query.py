@@ -1,3 +1,7 @@
+import os
+import sys
+module_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../'))
+sys.path.append(module_dir)
 from utils import retrieve, generate, embed
 import re
 
@@ -36,5 +40,9 @@ def multi_query(query: str = "This is an example query a user would ask of your 
                     #RESPONSE:
                     """
     
-    system_prompt = system_prompt.replace("{context}", context).replace("{question}", query)
+    system_prompt = system_prompt.replace("{context}", str(context)).replace("{question}", query)
     return generate(system_prompt)
+
+
+if __name__ == "__main__":
+    print(multi_query())

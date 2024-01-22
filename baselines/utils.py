@@ -8,7 +8,6 @@ import os
 
 load_dotenv()
 
-
 # Mock implementation of the services needed to build this module
 pyembeddings.init(os.getenv('PYEMBEDDINGS_KEY'))
 
@@ -21,7 +20,7 @@ db = pyembeddings.Database()
 collection = db.create_collection("rag_collection", 'BAAI/bge-base-en-v1.5')
 
 # LLM
-client = OpenAI(API_KEY = os.getenv('OPENAI_API_KEY'))
+client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 def retrieve(vector: np.array, metadata: bool = False) -> dict[str, Union[list[str], list[dict]]]:
     """
@@ -32,7 +31,7 @@ def retrieve(vector: np.array, metadata: bool = False) -> dict[str, Union[list[s
     ##### EXAMPLE IMPLEMENTATION #####
     relevant_texts = collection.query(query_embedding = vector)
     text = relevant_texts['documents'][0]
-    metadata = relevant_texts['metadata'][0]
+    metadata = relevant_texts['metadatas'][0]
     return {"text": text, "metadata": metadata}
     ##################################
 
