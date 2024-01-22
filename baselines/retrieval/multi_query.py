@@ -19,10 +19,8 @@ def multi_query(query: str = "This is an example query a user would ask of your 
     context = []
     for query in queries:
         embedded_query = embed(query)
-        relevant = retrieve(embedded_query)['text']
-        for info in relevant:
-            if info not in context:
-                context.append(info)
+        context.extend(retrieve(embedded_query)['text'])
+    context = list(set(context))
 
     system_prompt = """
                     You are a retrieval system designed to help users learn about <YOUR TOPIC>. You will receive a question on <YOUR TOPIC>, as well as relevant context for it, and you will answer the question. The following is a set of context and the question:
