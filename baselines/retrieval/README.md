@@ -3,7 +3,7 @@ Set of base implementations of different retrieval methods.
 
 # Best Practices
 * An LLM is able to understand and process *markdown*, *html*, or *xml* the best as a query due to its structure with minimal tagging
-* Always follow this order when crafting your prompts:
+* Always follow this order (descending) when crafting your prompts:
     * Text Type (user, assistant, system)
     * Task Context
     * Background Data and Documents
