@@ -2,9 +2,9 @@ from typing import Union
 import uuid
 import numpy as np
 
-def retrieve(query: str, metadata: bool = False) -> dict[str, Union[list[str], list[dict]]]:
+def retrieve(vector: np.array, metadata: bool = False) -> dict[str, Union[list[str], list[dict]]]:
     """
-    Simulates retrieving the most relevant text from a vector database, given any input text. Flag metadata = True if you want to also retrieve the metadata.
+    Simulates retrieving the most relevant text from a vector database, given any input vector. Flag metadata = True if you want to also retrieve the metadata.
     Returns dict in form {"text": <LIST OF TEXTS>, "metadata": <LIST OF METADATA>}. 
     """
     return {"text": [""], "metadata": [{}]}
